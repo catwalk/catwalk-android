@@ -17,7 +17,7 @@ class CTWOfflineStateFragment : Fragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         binding = FragmentCtwOfflineStateBinding.inflate(layoutInflater, container, false)
         binding.btnOfflineStateConfirmation.setOnClickListener {
             (activity as CTWGenieActivity).finish()
@@ -27,7 +27,7 @@ class CTWOfflineStateFragment : Fragment() {
     }
 
     private fun enableCustomConfig() {
-        binding.tvAssistantTitle.setTextColor(CTWConfig.getMenuButtonBackgroundColor())
+        binding.tvAssistantTitle.setTextColor(CTWConfig.getMenuScreenTitleColor())
         binding.tvAssistantTitle.typeface = CTWConfig.getRegularTypeface()
         (activity as CTWGenieActivity).getAllButtons(binding.llOfflineStateOptions).forEach {
             it.setTextColor(CTWConfig.getMenuButtonFontColor())

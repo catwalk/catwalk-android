@@ -11,6 +11,7 @@ class CTWConfig {
         var sessionId: String? = null
 
         private var menuScreenBackgroundColor: Int = Color.parseColor("#0000FF")
+        private var menuScreenTitleColor: Int = Color.parseColor("#FFFFFF")
         private var menuButtonBackgroundColor: Int = Color.parseColor("#FFFFFF")
         private var menuButtonFontColor: Int = Color.parseColor("#CC2C8D")
         private var generalButtonBackgroundColor: Int = Color.parseColor("#0000FF")
@@ -29,6 +30,14 @@ class CTWConfig {
 
         fun setMenuScreenBackgroundColor(hex: String) {
             menuScreenBackgroundColor = Color.parseColor(hex)
+        }
+
+        fun getMenuScreenTitleColor(): Int {
+            return menuScreenTitleColor
+        }
+
+        fun setMenuScreenTitleColor(hex: String) {
+            menuScreenTitleColor = Color.parseColor(hex)
         }
 
         fun getMenuButtonBackgroundColor(): Int {

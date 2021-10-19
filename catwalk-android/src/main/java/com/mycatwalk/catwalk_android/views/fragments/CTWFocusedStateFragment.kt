@@ -18,7 +18,7 @@ class CTWFocusedStateFragment : Fragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         // Inflate the layout for this fragment
         binding = FragmentCtwFocusedStateBinding.inflate(layoutInflater, container, false)
 
@@ -56,7 +56,7 @@ class CTWFocusedStateFragment : Fragment() {
     }
 
     private fun enableCustomConfig() {
-        binding.tvAssistantTitle.setTextColor(CTWConfig.getMenuButtonBackgroundColor())
+        binding.tvAssistantTitle.setTextColor(CTWConfig.getMenuScreenTitleColor())
         binding.tvAssistantTitle.typeface = CTWConfig.getRegularTypeface()
         (activity as CTWGenieActivity).getAllButtons(binding.llFocusedStateOptions).forEach {
             it.setTextColor(CTWConfig.getMenuButtonFontColor())

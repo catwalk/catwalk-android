@@ -5,8 +5,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import com.mycatwalk.catwalk_android.config.CTWConfig
 import com.mycatwalk.catwalk_android.R
+import com.mycatwalk.catwalk_android.config.CTWConfig
 import com.mycatwalk.catwalk_android.databinding.FragmentCtwGlobalStateBinding
 import com.mycatwalk.catwalk_android.helpers.CTWUtils.Companion.addFragment
 import com.mycatwalk.catwalk_android.views.activities.CTWGenieActivity
@@ -19,7 +19,7 @@ class CTWGlobalStateFragment : Fragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         binding = FragmentCtwGlobalStateBinding.inflate(layoutInflater, container, false)
         enableCustomConfig()
 
@@ -35,7 +35,7 @@ class CTWGlobalStateFragment : Fragment() {
     }
 
     private fun enableCustomConfig() {
-        binding.tvAssistantTitle.setTextColor(CTWConfig.getMenuButtonBackgroundColor())
+        binding.tvAssistantTitle.setTextColor(CTWConfig.getMenuScreenTitleColor())
         binding.tvAssistantTitle.typeface = CTWConfig.getRegularTypeface()
         (activity as CTWGenieActivity).getAllButtons(binding.llGlobalStateOptions).forEach {
             it.setTextColor(CTWConfig.getMenuButtonFontColor())
