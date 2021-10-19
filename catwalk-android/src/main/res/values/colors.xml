@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="menuButtonBackgroundColor">#FFFFFF</color>
+    <color name="menuButtonFontColor">#CC2C8D</color>
+    <color name="menuScreenBackgroundColor">#0000FF</color>
+    <color name="menuScreenTitleColor">#FFFFFF</color>
+
+    <color name="generalButtonBackgroundColor">#0000FF</color>
+    <color name="generalButtonFontColor">#FFFFFF</color>
+
+    <color name="chatScreenBackgroundColor">#0000FF</color>
+    <color name="chatScreenTitleColor">#FFFFFF</color>
+    <color name="chatScreenAssistantMessageColor">#FFFFFF</color>
+    <color name="chatScreenUserMessageColor">#FFFFFF</color>
+
+    <color name="white">#FFFFFF</color>
+    <color name="black">#000000</color>
+    <color name="babyBlue">#89cff0</color>
+    <color name="lightBrown">#b5651d</color>
+    <color name="armyGreen">#7cb259</color>
+    <color name="lightGrey">#CBCBCB</color>
+</resources>

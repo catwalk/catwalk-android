@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/transparent">
+
+    <TextView
+        android:id="@+id/tv_assistant_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="40dp"
+        android:text="Coisas que eu posso ajudar você"
+        android:textAlignment="center"
+        android:textColor="@color/white"
+        android:textSize="24sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <LinearLayout
+        android:id="@+id/ll_focused_state_options"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="40dp"
+        android:layout_marginBottom="32dp"
+        android:orientation="vertical"
+        android:visibility="visible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_assistant_title">
+
+        <Button
+            android:id="@+id/btn_focused_find_similars"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:background="@drawable/ctwlk_genie_default_button"
+            android:text="achar peça parecida"
+            android:textAllCaps="false"
+            android:textColor="@color/menuButtonFontColor"
+            android:textSize="18sp" />
+
+        <Button
+            android:id="@+id/btn_focused_combine_item"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/ctwlk_genie_default_button"
+            android:text="looks com esta peça"
+            android:textAllCaps="false"
+            android:textColor="@color/menuButtonFontColor"
+            android:textSize="18sp" />
+
+        <Button
+            android:id="@+id/btn_focused_item_details"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/ctwlk_genie_default_button"
+            android:text="detalhes do produto"
+            android:textAllCaps="false"
+            android:textColor="@color/menuButtonFontColor"
+            android:textSize="18sp"
+            android:visibility="gone" />
+
+        <Button
+            android:id="@+id/btn_focused_more_colors"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/ctwlk_genie_default_button"
+            android:text="tem outras cores?"
+            android:textAllCaps="false"
+            android:textColor="@color/menuButtonFontColor"
+            android:textSize="18sp" />
+
+        <Button
+            android:id="@+id/btn_focused_more_sizes"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/ctwlk_genie_default_button"
+            android:text="tem outros tamanhos?"
+            android:textAllCaps="false"
+            android:textColor="@color/menuButtonFontColor"
+            android:textSize="18sp" />
+
+        <Button
+            android:id="@+id/btn_focused_ask_something"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/ctwlk_genie_default_button"
+            android:text="perguntar algo"
+            android:textAllCaps="false"
+            android:textColor="@color/menuButtonFontColor"
+            android:textSize="18sp"
+            android:visibility="gone" />
+
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

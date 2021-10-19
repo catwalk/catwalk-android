@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.mycatwalk.catwalk_android">
+
+    <application>
+        <activity
+            android:name="com.mycatwalk.catwalk_android.views.activities.CTWGenieActivity"
+            android:exported="true"
+            android:theme="@style/Theme.AppCompat.NoActionBar">
+        </activity>
+    </application>
+
+
+
+</manifest>

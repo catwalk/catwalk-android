@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="rectangle">
+
+    <item>
+        <shape>
+            <padding android:top="0.5dp" android:right="0.5dp" android:bottom="0.5dp" android:left="0.5dp" />
+            <solid android:color="#05000000" />
+            <corners android:radius="4dp" />
+        </shape>
+    </item>
+    <item>
+        <shape>
+            <padding android:top="0.5dp" android:right="0.5dp" android:bottom="0.5dp" android:left="0.5dp" />
+            <solid android:color="#10000000" />
+            <corners android:radius="4dp" />
+        </shape>
+    </item>
+    <item>
+        <shape>
+            <padding android:top="0.5dp" android:right="0.5dp" android:bottom="0.5dp" android:left="0.5dp" />
+            <solid android:color="#15000000" />
+            <corners android:radius="4dp" />
+        </shape>
+    </item>
+    <item>
+        <shape>
+            <padding android:top="0.5dp" android:right="0.5dp" android:bottom="0.5dp" android:left="0.5dp" />
+            <solid android:color="#20000000" />
+            <corners android:radius="4dp" />
+        </shape>
+    </item>
+
+
+
+    <item>
+        <shape>
+            <corners android:radius="4dp" />
+            <gradient android:startColor="#F9F9F9"
+                android:centerColor="#F9F9F9"
+                android:endColor="#E7E7E7"
+                android:angle="270"
+                android:centerY="70%" />
+        </shape>
+    </item>
+
+    <item>
+        <shape>
+            <corners android:radius="4dp" />
+            <gradient android:startColor="#00FFFFFF"
+                android:centerColor="#00FFFFFF"
+                android:endColor="#60000000"
+                android:angle="270"
+                android:centerY="90%" />
+        </shape>
+    </item>
+
+    <item>
+        <shape>
+            <corners android:radius="3dp" />
+            <stroke android:width="0.5dp"
+                android:color="#30000000" />
+        </shape>
+    </item>
+
+</layer-list>
