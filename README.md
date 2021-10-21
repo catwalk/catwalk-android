@@ -1,5 +1,7 @@
 # Catwalk Android SDK
 
+[![Maven Central](https://img.shields.io/maven-central/v/com.mycatwalk/catwalk-android.svg?label=Maven%20Central)](https://search.maven.org/search?q=g:%22com.mycatwalk%22%20AND%20a:%22catwalk-android%22)
+
 
 
 Catwalk's Android SDK allows you to offer a virtual fashion assistant in your iOS app. We provide a handful of features to assist your customers and clients when navigating your aplication, such as creating looks, finding similar items, groupoing multiple skus into a single hub and more.
