@@ -17,6 +17,11 @@ class CTWAssistantContext {
         var focusedSKU: String? = null
         var offlineState: Boolean = false
 
+        suspend fun shouldShowItem(sku: String): Boolean {
+            val itemAvailability = CTWNetworkManager.checkItemAvailability(sku, true)
+            return itemAvailability.available ?: false
+        }
+
         fun presentAssistant(hostActivity: AppCompatActivity, delegate: CTWAssistantDelegate, sku: String? = null) {
             this.hostActivity = hostActivity
             this.delegate = delegate
