@@ -6,7 +6,7 @@
 
 Catwalk's Android SDK allows you to offer a virtual fashion assistant in your iOS app. We provide a handful of features to assist your customers and clients when navigating your aplication, such as creating looks, finding similar items, groupoing multiple skus into a single hub and more.
 
-[Get started with our Integration and Documentation]https://catwalk.readme.io/docs/androidsdk)
+[Get started with our Integration and Documentation](https://catwalk.readme.io/docs/androidsdk)
 
 
 ## Features
