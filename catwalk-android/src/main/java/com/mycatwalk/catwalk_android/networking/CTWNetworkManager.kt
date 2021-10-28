@@ -1,8 +1,10 @@
 package com.mycatwalk.catwalk_android.networking
 
+import android.util.Log
 import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.StringRequest
 import com.google.gson.Gson
+import com.mycatwalk.catwalk_android.config.CTWConfig
 import com.mycatwalk.catwalk_android.config.CTWConfig.Companion.apiToken
 import com.mycatwalk.catwalk_android.config.CTWConfig.Companion.bundle
 import com.mycatwalk.catwalk_android.config.CTWConfig.Companion.sessionId
@@ -16,13 +18,13 @@ class CTWNetworkManager {
     companion object {
         private const val CTWLK_API_ROOT = "https://app.mycatwalk.com/mobile"
 
-        suspend fun fetchSessionInfo() = suspendCoroutine<String> { cont ->
+        suspend fun fetchSessionInfo() = suspendCoroutine<CTWSession> { cont ->
             val request = object: JsonObjectRequest(
                  "$CTWLK_API_ROOT/session",
                 { response ->
-                    cont.resume("Response is: ${response.toString()}")
+                    cont.resume(Gson().fromJson(response.toString(), CTWSession::class.java))
                 },
-                { cont.resume("Something went wrong!") })
+                { cont.resume(CTWSession(null)) })
             {
                 override fun getHeaders(): MutableMap<String, String> {
                     return generateHeadersMap()
@@ -31,15 +33,17 @@ class CTWNetworkManager {
             VolleyManager.requestQueue.add(request)
         }
 
-        suspend fun endSession() = suspendCoroutine<String> { cont ->
+        suspend fun endSession() = suspendCoroutine<CTWDefaultResponse> { cont ->
             val request = object: JsonObjectRequest(
                 Method.POST,
-                "$CTWLK_API_ROOT/session",
+                "$CTWLK_API_ROOT/endSession",
                 JSONObject(),
                 { response ->
-                    cont.resume("Response is: ${response.toString()}")
+                    cont.resume(Gson().fromJson(response.toString(), CTWDefaultResponse::class.java))
                 },
-                { cont.resume("Something went wrong!") })
+                { error ->
+                    cont.resume(CTWDefaultResponse(400, "Something went wrong!"))
+                })
             {
                 override fun getHeaders(): MutableMap<String, String> {
                     return generateHeadersMap()
@@ -48,17 +52,19 @@ class CTWNetworkManager {
             VolleyManager.requestQueue.add(request)
         }
 
-        suspend fun sendAttendanceReview(positive: Boolean) = suspendCoroutine<String> { cont ->
+        suspend fun sendAttendanceReview(positive: Boolean) = suspendCoroutine<CTWDefaultResponse> { cont ->
             val postObj = JSONObject()
             postObj.put("positive", positive)
             val request = object: JsonObjectRequest(
                 Method.POST,
-                "$CTWLK_API_ROOT/session",
+                "$CTWLK_API_ROOT/attendance/review",
                 postObj,
                 { response ->
-                    cont.resume("Response is: ${response.toString()}")
+                    cont.resume(Gson().fromJson(response.toString(), CTWDefaultResponse::class.java))
                 },
-                { cont.resume("Something went wrong!") })
+                { error ->
+                    cont.resume(CTWDefaultResponse(400, "Something went wrong!"))
+                })
             {
                 override fun getHeaders(): MutableMap<String, String> {
                     return generateHeadersMap()
@@ -245,6 +251,7 @@ class CTWNetworkManager {
         suspend fun fetchMessageResponse(message: String, sku: String?) = suspendCoroutine<CTWChatMessage?> { cont ->
             val postObj = JSONObject()
             postObj.put("message", message)
+            postObj.put("sessionId", CTWConfig.sessionId ?: "")
             val request = object: JsonObjectRequest(
                 Method.POST,
                 "$CTWLK_API_ROOT/chat/message",
@@ -252,11 +259,22 @@ class CTWNetworkManager {
                 { message ->
                     cont.resume(Gson().fromJson(message.toString(), CTWChatMessage::class.java))
                 },
-                { cont.resume(null) })
+                { error ->
+                    Log.d("DEBUG:", error.toString())
+                    cont.resume(null)
+                 })
             {
                 override fun getHeaders(): MutableMap<String, String> {
                     return generateHeadersMap(sku)
                 }
+//
+//                override fun getParams(): MutableMap<String, String> {
+//                    val params: MutableMap<String, String> = HashMap()
+//                    //Change with your post params
+//                    params["message"] = message
+//                    params["sessionId"] = CTWConfig.sessionId ?: ""
+//                    return params
+//                }
             }
             VolleyManager.requestQueue.add(request)
         }

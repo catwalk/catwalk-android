@@ -14,6 +14,7 @@ import com.mycatwalk.catwalk_android.config.CTWAssistantContext
 import com.mycatwalk.catwalk_android.databinding.CtwLookLayoutBinding
 import com.mycatwalk.catwalk_android.models.CTWLook
 import com.mycatwalk.catwalk_android.models.CTWLookItem
+import com.mycatwalk.catwalk_android.views.activities.CTWGenieActivity
 import com.mycatwalk.catwalk_android.views.fragments.CTWGenieLooksFragment
 
 class CTWGenieLooksAdapter(private val fragment: CTWGenieLooksFragment, private val lookSet: Array<CTWLook>) :
@@ -40,7 +41,7 @@ class CTWGenieLooksAdapter(private val fragment: CTWGenieLooksFragment, private 
             val sku = item.product?.sku
             if(sku != null) {
                 CTWAssistantContext.delegate?.didReturnSingleItem(sku)
-                fragment.activity?.finish()
+                (fragment.activity as? CTWGenieActivity)?.finishAttendance()
             }
         }
         val layoutParams = LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, 0)

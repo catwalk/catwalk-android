@@ -16,6 +16,7 @@ import com.mycatwalk.catwalk_android.config.CTWAssistantContext
 import com.mycatwalk.catwalk_android.config.CTWConfig
 import com.mycatwalk.catwalk_android.helpers.CTWUtils
 import com.mycatwalk.catwalk_android.models.CTWProduct
+import com.mycatwalk.catwalk_android.views.activities.CTWGenieActivity
 
 class CTWSizesListingAdapter(private val fragment: Fragment, private val dataSet: Array<CTWProduct>) :
     RecyclerView.Adapter<CTWSizesListingAdapter.ViewHolder>() {
@@ -58,7 +59,7 @@ class CTWSizesListingAdapter(private val fragment: Fragment, private val dataSet
         val sku = dataSet[position].sizes?.get(0)?.sku
         if (sku != null) {
             CTWAssistantContext.delegate?.didReturnShoppingItems(arrayOf(sku))
-            fragment.activity?.finish()
+            (fragment.activity as? CTWGenieActivity)?.finishAttendance()
         }
     }
 

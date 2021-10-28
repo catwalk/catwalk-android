@@ -20,7 +20,7 @@ class CTWOfflineStateFragment : Fragment() {
     ): View {
         binding = FragmentCtwOfflineStateBinding.inflate(layoutInflater, container, false)
         binding.btnOfflineStateConfirmation.setOnClickListener {
-            (activity as CTWGenieActivity).finish()
+            (activity as? CTWGenieActivity)?.finishAttendance()
         }
         enableCustomConfig()
         return binding.root

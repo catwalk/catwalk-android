@@ -17,7 +17,7 @@
         android:text="Coisas que eu posso ajudar você"
         android:textAlignment="center"
         android:textColor="@color/white"
-        android:textSize="24sp"
+        android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -39,7 +39,7 @@
         <Button
             android:id="@+id/btn_global_see_trending_items"
             android:layout_width="match_parent"
-            android:layout_height="56dp"
+            android:layout_height="48dp"
             android:background="@drawable/ctwlk_genie_default_button"
             android:text="ver tendências"
             android:textAllCaps="false"
@@ -49,8 +49,8 @@
         <Button
             android:id="@+id/btn_global_create_look"
             android:layout_width="match_parent"
-            android:layout_height="56dp"
-            android:layout_marginTop="20dp"
+            android:layout_height="48dp"
+            android:layout_marginTop="16dp"
             android:background="@drawable/ctwlk_genie_default_button"
             android:text="montar um look"
             android:textAllCaps="false"
@@ -60,14 +60,13 @@
         <Button
             android:id="@+id/btn_global_ask_something"
             android:layout_width="match_parent"
-            android:layout_height="56dp"
-            android:layout_marginTop="20dp"
+            android:layout_height="48dp"
+            android:layout_marginTop="16dp"
             android:background="@drawable/ctwlk_genie_default_button"
             android:text="perguntar algo"
             android:textAllCaps="false"
             android:textColor="@color/menuButtonFontColor"
-            android:textSize="18sp"
-            android:visibility="gone" />
+            android:textSize="18sp" />
 
     </LinearLayout>
 

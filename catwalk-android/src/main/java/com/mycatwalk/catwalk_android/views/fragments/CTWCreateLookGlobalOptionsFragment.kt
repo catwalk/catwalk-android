@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.mycatwalk.catwalk_android.R
+import com.mycatwalk.catwalk_android.config.CTWConfig
 import com.mycatwalk.catwalk_android.databinding.FragmentCtwCreateLookGlobalOptionsBinding
 import com.mycatwalk.catwalk_android.helpers.CTWUtils.Companion.addFragment
 import com.mycatwalk.catwalk_android.views.activities.CTWGenieActivity
@@ -22,6 +23,8 @@ class CTWCreateLookGlobalOptionsFragment : Fragment() {
         // Inflate the layout for this fragment
         binding = FragmentCtwCreateLookGlobalOptionsBinding.inflate(layoutInflater, container, false)
 
+        enableCustomConfig()
+
         binding.btnLookWithTrendingItems.setOnClickListener {
             (activity as CTWGenieActivity).trendingLooks()
         }
@@ -31,6 +34,14 @@ class CTWCreateLookGlobalOptionsFragment : Fragment() {
         }
 
         return binding.root
+    }
+
+    private fun enableCustomConfig() {
+        (activity as CTWGenieActivity).getAllButtons(binding.llCreateLookOptions).forEach {
+            it.setTextColor(CTWConfig.getMenuButtonFontColor())
+            it.background.setTint(CTWConfig.getMenuButtonBackgroundColor())
+            it.typeface = CTWConfig.getRegularTypeface()
+        }
     }
 
     companion object {

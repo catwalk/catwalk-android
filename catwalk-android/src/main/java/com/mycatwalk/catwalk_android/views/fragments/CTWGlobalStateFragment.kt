@@ -31,6 +31,10 @@ class CTWGlobalStateFragment : Fragment() {
             (activity as CTWGenieActivity).addFragment(CTWCreateLookGlobalOptionsFragment.newInstance(), R.id.fragments_container)
         }
 
+        binding.btnGlobalAskSomething.setOnClickListener {
+            (activity as CTWGenieActivity).addFragment(CTWChatFragment.newInstance(), R.id.fragments_container)
+        }
+
         return binding.root
     }
 

@@ -16,7 +16,7 @@
         android:text="Coisas que eu posso ajudar você"
         android:textAlignment="center"
         android:textColor="@color/white"
-        android:textSize="24sp"
+        android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -39,7 +39,7 @@
         <Button
             android:id="@+id/btn_focused_find_similars"
             android:layout_width="match_parent"
-            android:layout_height="56dp"
+            android:layout_height="48dp"
             android:background="@drawable/ctwlk_genie_default_button"
             android:text="achar peça parecida"
             android:textAllCaps="false"
@@ -49,8 +49,8 @@
         <Button
             android:id="@+id/btn_focused_combine_item"
             android:layout_width="match_parent"
-            android:layout_height="56dp"
-            android:layout_marginTop="20dp"
+            android:layout_height="48dp"
+            android:layout_marginTop="16dp"
             android:background="@drawable/ctwlk_genie_default_button"
             android:text="looks com esta peça"
             android:textAllCaps="false"
@@ -60,20 +60,19 @@
         <Button
             android:id="@+id/btn_focused_item_details"
             android:layout_width="match_parent"
-            android:layout_height="56dp"
-            android:layout_marginTop="20dp"
+            android:layout_height="48dp"
+            android:layout_marginTop="16dp"
             android:background="@drawable/ctwlk_genie_default_button"
             android:text="detalhes do produto"
             android:textAllCaps="false"
             android:textColor="@color/menuButtonFontColor"
-            android:textSize="18sp"
-            android:visibility="gone" />
+            android:textSize="18sp" />
 
         <Button
             android:id="@+id/btn_focused_more_colors"
             android:layout_width="match_parent"
-            android:layout_height="56dp"
-            android:layout_marginTop="20dp"
+            android:layout_height="48dp"
+            android:layout_marginTop="16dp"
             android:background="@drawable/ctwlk_genie_default_button"
             android:text="tem outras cores?"
             android:textAllCaps="false"
@@ -83,8 +82,8 @@
         <Button
             android:id="@+id/btn_focused_more_sizes"
             android:layout_width="match_parent"
-            android:layout_height="56dp"
-            android:layout_marginTop="20dp"
+            android:layout_height="48dp"
+            android:layout_marginTop="16dp"
             android:background="@drawable/ctwlk_genie_default_button"
             android:text="tem outros tamanhos?"
             android:textAllCaps="false"
@@ -94,14 +93,13 @@
         <Button
             android:id="@+id/btn_focused_ask_something"
             android:layout_width="match_parent"
-            android:layout_height="56dp"
-            android:layout_marginTop="20dp"
+            android:layout_height="48dp"
+            android:layout_marginTop="16dp"
             android:background="@drawable/ctwlk_genie_default_button"
             android:text="perguntar algo"
             android:textAllCaps="false"
             android:textColor="@color/menuButtonFontColor"
-            android:textSize="18sp"
-            android:visibility="gone" />
+            android:textSize="18sp" />
 
     </LinearLayout>
 

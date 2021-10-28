@@ -5,9 +5,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import com.mycatwalk.catwalk_android.R
 import com.mycatwalk.catwalk_android.config.CTWAssistantContext
 import com.mycatwalk.catwalk_android.config.CTWConfig
 import com.mycatwalk.catwalk_android.databinding.FragmentCtwFocusedStateBinding
+import com.mycatwalk.catwalk_android.helpers.CTWUtils.Companion.addFragment
 import com.mycatwalk.catwalk_android.views.activities.CTWGenieActivity
 
 class CTWFocusedStateFragment : Fragment() {
@@ -50,6 +52,18 @@ class CTWFocusedStateFragment : Fragment() {
             if(sku != null) {
                 (activity as CTWGenieActivity).availableColors(sku)
             }
+        }
+
+        binding.btnFocusedItemDetails.setOnClickListener {
+            val bundle = Bundle()
+            bundle.putString("STARTING_MESSAGE", "Detalhes")
+            val fragment = CTWChatFragment.newInstance()
+            fragment.arguments = bundle
+            (activity as CTWGenieActivity).addFragment(fragment, R.id.fragments_container)
+        }
+
+        binding.btnFocusedAskSomething.setOnClickListener {
+            (activity as CTWGenieActivity).addFragment(CTWChatFragment.newInstance(), R.id.fragments_container)
         }
 
         return binding.root

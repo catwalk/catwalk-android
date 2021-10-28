@@ -23,7 +23,7 @@
         <Button
             android:id="@+id/btn_look_with_trending_items"
             android:layout_width="match_parent"
-            android:layout_height="56dp"
+            android:layout_height="48dp"
             android:background="@drawable/ctwlk_genie_default_button"
             android:text="look com top 10"
             android:textAllCaps="false"
@@ -33,7 +33,7 @@
         <Button
             android:id="@+id/btn_look_by_color"
             android:layout_width="match_parent"
-            android:layout_height="56dp"
+            android:layout_height="48dp"
             android:layout_marginTop="20dp"
             android:background="@drawable/ctwlk_genie_default_button"
             android:text="escolher uma cor"

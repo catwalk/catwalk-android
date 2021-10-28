@@ -17,6 +17,7 @@ import com.mycatwalk.catwalk_android.config.CTWAssistantContext
 import com.mycatwalk.catwalk_android.config.CTWConfig
 import com.mycatwalk.catwalk_android.helpers.CTWUtils
 import com.mycatwalk.catwalk_android.models.CTWProduct
+import com.mycatwalk.catwalk_android.views.activities.CTWGenieActivity
 
 class CTWItemListingAdapter(private val fragment: Fragment, private val dataSet: Array<CTWProduct>) :
     RecyclerView.Adapter<CTWItemListingAdapter.ViewHolder>() {
@@ -63,7 +64,7 @@ class CTWItemListingAdapter(private val fragment: Fragment, private val dataSet:
         val sku = dataSet[position].sizes?.get(0)?.sku
         if (sku != null) {
             CTWAssistantContext.delegate?.didReturnSingleItem(sku)
-            fragment.activity?.finish()
+            (fragment.activity as? CTWGenieActivity)?.finishAttendance()
         }
     }
 

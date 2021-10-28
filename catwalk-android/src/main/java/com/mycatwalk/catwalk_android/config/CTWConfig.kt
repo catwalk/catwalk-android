@@ -17,12 +17,17 @@ class CTWConfig {
         private var generalButtonBackgroundColor: Int = Color.parseColor("#0000FF")
         private var generalButtonFontColor: Int = Color.parseColor("#FFFFFF")
 
+        private var chatScreenBackgroundColor: Int = Color.parseColor("#0000FF")
+        private var chatScreenTitleColor: Int = Color.parseColor("#FFFFFF")
+        private var chatScreenAssistantMessageColor: Int = Color.parseColor("#FFFFFF")
+        private var chatScreenUserMessageColor: Int = Color.parseColor("#FFFFFF")
+
         private var regularTypeface: Typeface = Typeface.createFromAsset(CTWApplication.appContext.assets, "fonts/greycliff_cf_regular.ttf")
         private var lightTypeface: Typeface = Typeface.createFromAsset(CTWApplication.appContext.assets, "fonts/greycliff_cf_light.ttf")
         private var boldTypeface: Typeface = Typeface.createFromAsset(CTWApplication.appContext.assets, "fonts/greycliff_cf_bold.ttf")
         private var italicTypeface: Typeface = Typeface.createFromAsset(CTWApplication.appContext.assets, "fonts/greycliff_cf_italic.ttf")
 
-        var defaultErrorMessage: String = "Parece haver um erro na sua requisição. Por favor, tente novamente mais tarde."
+        const val defaultErrorMessage: String = "Parece haver um erro na sua requisição. Por favor, tente novamente mais tarde."
 
         fun getMenuScreenBackgroundColor(): Int {
             return menuScreenBackgroundColor
@@ -70,6 +75,38 @@ class CTWConfig {
 
         fun setGeneralButtonTextColor(hex: String) {
             generalButtonFontColor = Color.parseColor(hex)
+        }
+
+        fun getChatScreenBackgroundColor(): Int {
+            return chatScreenBackgroundColor
+        }
+
+        fun setChatScreenBackgroundColor(hex: String) {
+            chatScreenBackgroundColor = Color.parseColor(hex)
+        }
+
+        fun getChatScreenTitleColor(): Int {
+            return chatScreenTitleColor
+        }
+
+        fun setChatScreenTitleColor(hex: String) {
+            chatScreenTitleColor = Color.parseColor(hex)
+        }
+
+        fun getChatScreenAssistantMessageColor(): Int {
+            return chatScreenAssistantMessageColor
+        }
+
+        fun setChatScreenAssistantMessageColor(hex: String) {
+            chatScreenAssistantMessageColor = Color.parseColor(hex)
+        }
+
+        fun getChatScreenUserMessageColor(): Int {
+            return chatScreenUserMessageColor
+        }
+
+        fun setChatScreenUserMessageColor(hex: String) {
+            chatScreenUserMessageColor = Color.parseColor(hex)
         }
 
         fun getRegularTypeface(): Typeface {

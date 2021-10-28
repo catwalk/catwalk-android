@@ -1,8 +1,10 @@
 package com.mycatwalk.catwalk_android.views.activities
 
+import android.content.Context
 import android.os.Bundle
 import android.view.View
 import android.view.ViewGroup
+import android.view.inputmethod.InputMethodManager
 import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
 import com.mycatwalk.catwalk_android.R
@@ -18,8 +20,8 @@ import com.mycatwalk.catwalk_android.networking.CTWNetworkManager
 import com.mycatwalk.catwalk_android.views.dialogs.CTWInfoDialog
 import com.mycatwalk.catwalk_android.views.dialogs.CTWLoadingDialog
 import com.mycatwalk.catwalk_android.views.fragments.*
+import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
@@ -32,23 +34,34 @@ class CTWGenieActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityCtwgenieBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        setupSession()
         configureUI()
         setupListeners()
     }
 
     private fun configureUI() {
-        if(CTWAssistantContext.offlineState) {
-            replaceFragment(CTWOfflineStateFragment.newInstance(), R.id.fragments_container)
-        }
-        else if(CTWAssistantContext.focusedSKU != null) {
-            replaceFragment(CTWFocusedStateFragment.newInstance(), R.id.fragments_container)
-        } else {
-            replaceFragment(CTWGlobalStateFragment.newInstance(), R.id.fragments_container)
+        when {
+            CTWAssistantContext.offlineState -> {
+                replaceFragment(CTWOfflineStateFragment.newInstance(), R.id.fragments_container)
+            }
+            CTWAssistantContext.focusedSKU != null -> {
+                replaceFragment(CTWFocusedStateFragment.newInstance(), R.id.fragments_container)
+            }
+            else -> {
+                replaceFragment(CTWGlobalStateFragment.newInstance(), R.id.fragments_container)
+            }
         }
 
         enableCustomConfig()
 
         binding.rootLayout.setBackgroundColor(CTWUtils.getColor(R.color.menuScreenBackgroundColor))
+    }
+
+    private fun setupSession() {
+        CoroutineScope(Dispatchers.IO).launch {
+            val sessionInfo = CTWNetworkManager.fetchSessionInfo()
+            CTWConfig.sessionId = sessionInfo.id
+        }
     }
 
     private fun enableCustomConfig() {
@@ -74,6 +87,9 @@ class CTWGenieActivity : AppCompatActivity() {
             } else if (fragment is CTWGenieShoppingListFragment) {
                 setHeaderTitle("Escolha seus tamanhos")
                 setLightMode()
+            } else if (fragment is CTWChatFragment) {
+                setHeaderTitle("Converse comigo")
+                setDarkMode()
             } else if (fragment is CTWCreateLookGlobalOptionsFragment || fragment is CTWCreateLookColorOptionsFragment) {
                 setHeaderTitle("Montar um look")
                 setDarkMode()
@@ -89,7 +105,7 @@ class CTWGenieActivity : AppCompatActivity() {
         }
 
         binding.header.btnClose.setOnClickListener {
-            finish()
+            finishAttendance()
         }
     }
 
@@ -131,7 +147,7 @@ class CTWGenieActivity : AppCompatActivity() {
 
     fun findSimilarItems(sku: String) {
         openLoader()
-        GlobalScope.launch {
+        CoroutineScope(Dispatchers.IO).launch {
             val similarSKUS = CTWNetworkManager.fetchSimilarItems(sku)
             withContext(Dispatchers.Default) {
                 val items = CTWNetworkManager.fetchProductsInfoFromSKUS(similarSKUS)
@@ -143,6 +159,7 @@ class CTWGenieActivity : AppCompatActivity() {
                         fragment.arguments = bundle
                         closeLoader()
                         addFragment(fragment, R.id.fragments_container)
+
                     } else {
                         showErrorDialog("Oops... não encontrei itens similares para esta peça!")
                     }
@@ -153,7 +170,7 @@ class CTWGenieActivity : AppCompatActivity() {
 
     fun availableColors(sku: String) {
         openLoader()
-        GlobalScope.launch {
+        CoroutineScope(Dispatchers.IO).launch {
             val availableColorsSKUS = CTWNetworkManager.availableColors(sku)
             withContext(Dispatchers.Default) {
                 val items = CTWNetworkManager.fetchProductsInfoFromSKUS(availableColorsSKUS)
@@ -175,7 +192,7 @@ class CTWGenieActivity : AppCompatActivity() {
 
     fun availableSizes(sku: String) {
         openLoader()
-        GlobalScope.launch {
+        CoroutineScope(Dispatchers.IO).launch {
             val item = CTWNetworkManager.fetchProductsInfoBySKU(sku)
             withContext(Dispatchers.Main) {
                 val sizesAsItems = item?.sizes?.filter { it.available == true}?.map {
@@ -198,7 +215,7 @@ class CTWGenieActivity : AppCompatActivity() {
 
     fun combine(sku: String) {
         openLoader()
-        GlobalScope.launch {
+        CoroutineScope(Dispatchers.IO).launch {
             val looks = CTWNetworkManager.fetchLooks(sku)
             withContext(Dispatchers.Main) {
                 if (looks.isNotEmpty()) {
@@ -219,7 +236,7 @@ class CTWGenieActivity : AppCompatActivity() {
     fun buyLook(lookItems: Array<CTWLookItem>) {
         openLoader()
         val itemsProductIds = lookItems.mapNotNull { it.product?.productId }
-        GlobalScope.launch {
+        CoroutineScope(Dispatchers.IO).launch {
             val items = CTWNetworkManager.fetchProductsInfoFromProductIds(itemsProductIds.toTypedArray())
             withContext(Dispatchers.Main) {
                 val bundle = Bundle()
@@ -234,7 +251,7 @@ class CTWGenieActivity : AppCompatActivity() {
 
     fun trendingItems() {
         openLoader()
-        GlobalScope.launch {
+        CoroutineScope(Dispatchers.IO).launch {
             val trendingSKUS = CTWNetworkManager.fetchTrendingSKUs()
             withContext(Dispatchers.Default) {
                 val items = CTWNetworkManager.fetchProductsInfoFromSKUS(trendingSKUS)
@@ -256,7 +273,7 @@ class CTWGenieActivity : AppCompatActivity() {
 
     fun trendingLooks() {
         openLoader()
-        GlobalScope.launch {
+        CoroutineScope(Dispatchers.IO).launch {
             val looks = CTWNetworkManager.fetchTrendingClothingAsLooks()
             withContext(Dispatchers.Main) {
                 if (looks.isNotEmpty()) {
@@ -276,7 +293,7 @@ class CTWGenieActivity : AppCompatActivity() {
 
     fun looksByColor(hueId: Int) {
         openLoader()
-        GlobalScope.launch {
+        CoroutineScope(Dispatchers.IO).launch {
             val looks = CTWNetworkManager.fetchCombinationsByHue(hueId)
             withContext(Dispatchers.Main) {
                 if (looks.isNotEmpty()) {
@@ -291,6 +308,15 @@ class CTWGenieActivity : AppCompatActivity() {
                 }
 
             }
+        }
+    }
+
+    fun sendAttendanceReview(positive: Boolean) {
+        openLoader()
+        CoroutineScope(Dispatchers.IO).launch {
+            CTWNetworkManager.sendAttendanceReview(positive)
+            closeLoader()
+            finishAttendance()
         }
     }
 
@@ -312,11 +338,28 @@ class CTWGenieActivity : AppCompatActivity() {
         openInfoDialog(text)
     }
 
+
+
     override fun onBackPressed() {
         if (supportFragmentManager.backStackEntryCount > 1) {
             supportFragmentManager.popBackStack()
         } else {
-            finish()
+            finishAttendance()
         }
     }
+
+    fun finishAttendance() {
+        CoroutineScope(Dispatchers.IO).launch {
+            withContext(Dispatchers.Main) {
+                finish()
+            }
+            CTWNetworkManager.endSession()
+        }
+
+    }
+}
+
+fun View.hideKeyboard() {
+    val inputManager = context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+    inputManager.hideSoftInputFromWindow(windowToken, 0)
 }

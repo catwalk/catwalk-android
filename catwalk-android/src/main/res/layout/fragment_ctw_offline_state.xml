@@ -39,7 +39,7 @@
         <Button
             android:id="@+id/btn_offline_state_confirmation"
             android:layout_width="match_parent"
-            android:layout_height="56dp"
+            android:layout_height="48dp"
             android:background="@drawable/ctwlk_genie_default_button"
             android:text="ok"
             android:textAllCaps="false"

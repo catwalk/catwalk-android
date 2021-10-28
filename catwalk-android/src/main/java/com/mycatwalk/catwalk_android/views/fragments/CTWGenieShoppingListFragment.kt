@@ -12,6 +12,7 @@ import com.mycatwalk.catwalk_android.config.CTWConfig
 import com.mycatwalk.catwalk_android.databinding.FragmentCtwGenieShoppingListBinding
 import com.mycatwalk.catwalk_android.helpers.CTWUtils
 import com.mycatwalk.catwalk_android.models.CTWProduct
+import com.mycatwalk.catwalk_android.views.activities.CTWGenieActivity
 import com.mycatwalk.catwalk_android.views.adapters.CTWShoppingListAdapter
 
 class CTWGenieShoppingListFragment : Fragment() {
@@ -39,7 +40,7 @@ class CTWGenieShoppingListFragment : Fragment() {
     private fun setupListeners() {
         binding.btnBuyLook.setOnClickListener {
             CTWAssistantContext.delegate?.didReturnShoppingItems(items.mapNotNull { it.chosenSKU }.toTypedArray())
-            activity?.finish()
+            (activity as? CTWGenieActivity)?.finishAttendance()
         }
     }
 

@@ -23,17 +23,18 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/btn_black_looks"
             android:layout_width="match_parent"
-            android:layout_height="56dp">
+            android:layout_height="48dp">
 
             <Button
+                android:id="@+id/btn_black"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:background="@drawable/ctwlk_genie_default_button"
+                android:clickable="false"
                 android:text="preto"
                 android:textAllCaps="false"
                 android:textColor="@color/menuButtonFontColor"
                 android:textSize="18sp"
-                android:clickable="false"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -55,17 +56,18 @@
             android:id="@+id/btn_white_looks"
             android:layout_marginTop="20dp"
             android:layout_width="match_parent"
-            android:layout_height="56dp">
+            android:layout_height="48dp">
 
             <Button
+                android:id="@+id/btn_white"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:background="@drawable/ctwlk_genie_default_button"
+                android:clickable="false"
                 android:text="branco"
                 android:textAllCaps="false"
                 android:textColor="@color/menuButtonFontColor"
                 android:textSize="18sp"
-                android:clickable="false"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -87,17 +89,18 @@
             android:id="@+id/btn_blue_looks"
             android:layout_marginTop="20dp"
             android:layout_width="match_parent"
-            android:layout_height="56dp">
+            android:layout_height="48dp">
 
             <Button
+                android:id="@+id/btn_blue"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:background="@drawable/ctwlk_genie_default_button"
+                android:clickable="false"
                 android:text="tons azuis"
                 android:textAllCaps="false"
                 android:textColor="@color/menuButtonFontColor"
                 android:textSize="18sp"
-                android:clickable="false"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -119,17 +122,18 @@
             android:id="@+id/btn_green_looks"
             android:layout_marginTop="20dp"
             android:layout_width="match_parent"
-            android:layout_height="56dp">
+            android:layout_height="48dp">
 
             <Button
+                android:id="@+id/btn_green"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:background="@drawable/ctwlk_genie_default_button"
+                android:clickable="false"
                 android:text="tons verdes"
                 android:textAllCaps="false"
                 android:textColor="@color/menuButtonFontColor"
                 android:textSize="18sp"
-                android:clickable="false"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -151,17 +155,18 @@
             android:id="@+id/btn_terrain_looks"
             android:layout_marginTop="20dp"
             android:layout_width="match_parent"
-            android:layout_height="56dp">
+            android:layout_height="48dp">
 
             <Button
+                android:id="@+id/btn_terrain"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:background="@drawable/ctwlk_genie_default_button"
+                android:clickable="false"
                 android:text="tons terra"
                 android:textAllCaps="false"
                 android:textColor="@color/menuButtonFontColor"
                 android:textSize="18sp"
-                android:clickable="false"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -183,17 +188,18 @@
             android:id="@+id/btn_gray_looks"
             android:layout_marginTop="20dp"
             android:layout_width="match_parent"
-            android:layout_height="56dp">
+            android:layout_height="48dp">
 
             <Button
+                android:id="@+id/btn_gray"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:background="@drawable/ctwlk_genie_default_button"
+                android:clickable="false"
                 android:text="acinzentados"
                 android:textAllCaps="false"
                 android:textColor="@color/menuButtonFontColor"
                 android:textSize="18sp"
-                android:clickable="false"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
