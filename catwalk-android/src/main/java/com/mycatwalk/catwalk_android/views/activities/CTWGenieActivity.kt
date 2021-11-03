@@ -146,22 +146,24 @@ class CTWGenieActivity : AppCompatActivity() {
     }
 
     fun findSimilarItems(sku: String) {
-        openLoader()
-        CoroutineScope(Dispatchers.IO).launch {
-            val similarSKUS = CTWNetworkManager.fetchSimilarItems(sku)
-            withContext(Dispatchers.Default) {
-                val items = CTWNetworkManager.fetchProductsInfoFromSKUS(similarSKUS)
-                withContext(Dispatchers.Main) {
-                    if(items.isNotEmpty()) {
-                        val bundle = Bundle()
-                        bundle.putSerializable("ITEMS_LIST", items)
-                        val fragment = CTWGenieItemListingFragment.newInstance()
-                        fragment.arguments = bundle
-                        closeLoader()
-                        addFragment(fragment, R.id.fragments_container)
+        if (!CTWLoadingDialog.isLoading()) {
+            openLoader()
+            CoroutineScope(Dispatchers.IO).launch {
+                val similarSKUS = CTWNetworkManager.fetchSimilarItems(sku)
+                withContext(Dispatchers.Default) {
+                    val items = CTWNetworkManager.fetchProductsInfoFromSKUS(similarSKUS)
+                    withContext(Dispatchers.Main) {
+                        if(items.isNotEmpty()) {
+                            val bundle = Bundle()
+                            bundle.putSerializable("ITEMS_LIST", items)
+                            val fragment = CTWGenieItemListingFragment.newInstance()
+                            fragment.arguments = bundle
+                            closeLoader()
+                            addFragment(fragment, R.id.fragments_container)
 
-                    } else {
-                        showErrorDialog("Oops... não encontrei itens similares para esta peça!")
+                        } else {
+                            showErrorDialog("Oops... não encontrei itens similares para esta peça!")
+                        }
                     }
                 }
             }
@@ -169,21 +171,23 @@ class CTWGenieActivity : AppCompatActivity() {
     }
 
     fun availableColors(sku: String) {
-        openLoader()
-        CoroutineScope(Dispatchers.IO).launch {
-            val availableColorsSKUS = CTWNetworkManager.availableColors(sku)
-            withContext(Dispatchers.Default) {
-                val items = CTWNetworkManager.fetchProductsInfoFromSKUS(availableColorsSKUS)
-                withContext(Dispatchers.Main) {
-                    if(items.isNotEmpty()) {
-                        val bundle = Bundle()
-                        bundle.putSerializable("ITEMS_LIST", items)
-                        val fragment = CTWGenieItemListingFragment.newInstance()
-                        fragment.arguments = bundle
-                        closeLoader()
-                        addFragment(fragment, R.id.fragments_container)
-                    } else {
-                        showErrorDialog("Oops... não encontrei outras cores para esta peça!")
+        if (!CTWLoadingDialog.isLoading()) {
+            openLoader()
+            CoroutineScope(Dispatchers.IO).launch {
+                val availableColorsSKUS = CTWNetworkManager.availableColors(sku)
+                withContext(Dispatchers.Default) {
+                    val items = CTWNetworkManager.fetchProductsInfoFromSKUS(availableColorsSKUS)
+                    withContext(Dispatchers.Main) {
+                        if(items.isNotEmpty()) {
+                            val bundle = Bundle()
+                            bundle.putSerializable("ITEMS_LIST", items)
+                            val fragment = CTWGenieItemListingFragment.newInstance()
+                            fragment.arguments = bundle
+                            closeLoader()
+                            addFragment(fragment, R.id.fragments_container)
+                        } else {
+                            showErrorDialog("Oops... não encontrei outras cores para esta peça!")
+                        }
                     }
                 }
             }
@@ -191,80 +195,88 @@ class CTWGenieActivity : AppCompatActivity() {
     }
 
     fun availableSizes(sku: String) {
-        openLoader()
-        CoroutineScope(Dispatchers.IO).launch {
-            val item = CTWNetworkManager.fetchProductsInfoBySKU(sku)
-            withContext(Dispatchers.Main) {
-                val sizesAsItems = item?.sizes?.filter { it.available == true}?.map {
-                    CTWProduct(item.headline, item.productId, item.image, it.sku, item.price, listOf(it), it.sku)
-                }
+        if (!CTWLoadingDialog.isLoading()) {
+            openLoader()
+            CoroutineScope(Dispatchers.IO).launch {
+                val item = CTWNetworkManager.fetchProductsInfoBySKU(sku)
+                withContext(Dispatchers.Main) {
+                    val sizesAsItems = item?.sizes?.filter { it.available == true}?.map {
+                        CTWProduct(item.headline, item.productId, item.image, it.sku, item.price, listOf(it), it.sku)
+                    }
 
-                if(sizesAsItems != null && sizesAsItems.isNotEmpty()) {
-                    val bundle = Bundle()
-                    bundle.putSerializable("ITEMS_LIST", sizesAsItems.toTypedArray())
-                    val fragment = CTWGenieSizeListingFragment.newInstance()
-                    fragment.arguments = bundle
-                    closeLoader()
-                    addFragment(fragment, R.id.fragments_container)
-                } else {
-                    showErrorDialog("Oops... não encontrei mais tamanhos para esta peça!")
+                    if(sizesAsItems != null && sizesAsItems.isNotEmpty()) {
+                        val bundle = Bundle()
+                        bundle.putSerializable("ITEMS_LIST", sizesAsItems.toTypedArray())
+                        val fragment = CTWGenieSizeListingFragment.newInstance()
+                        fragment.arguments = bundle
+                        closeLoader()
+                        addFragment(fragment, R.id.fragments_container)
+                    } else {
+                        showErrorDialog("Oops... não encontrei mais tamanhos para esta peça!")
+                    }
                 }
             }
         }
     }
 
     fun combine(sku: String) {
-        openLoader()
-        CoroutineScope(Dispatchers.IO).launch {
-            val looks = CTWNetworkManager.fetchLooks(sku)
-            withContext(Dispatchers.Main) {
-                if (looks.isNotEmpty()) {
-                    val bundle = Bundle()
-                    bundle.putSerializable("LOOKS_LIST", looks)
-                    val fragment = CTWGenieLooksFragment.newInstance()
-                    fragment.arguments = bundle
-                    closeLoader()
-                    addFragment(fragment, R.id.fragments_container)
-                } else {
-                    showErrorDialog("Oops... não encontrei combinações!")
-                }
+        if (!CTWLoadingDialog.isLoading()) {
+            openLoader()
+            CoroutineScope(Dispatchers.IO).launch {
+                val looks = CTWNetworkManager.fetchLooks(sku)
+                withContext(Dispatchers.Main) {
+                    if (looks.isNotEmpty()) {
+                        val bundle = Bundle()
+                        bundle.putSerializable("LOOKS_LIST", looks)
+                        val fragment = CTWGenieLooksFragment.newInstance()
+                        fragment.arguments = bundle
+                        closeLoader()
+                        addFragment(fragment, R.id.fragments_container)
+                    } else {
+                        showErrorDialog("Oops... não encontrei combinações!")
+                    }
 
+                }
             }
         }
     }
 
     fun buyLook(lookItems: Array<CTWLookItem>) {
-        openLoader()
-        val itemsProductIds = lookItems.mapNotNull { it.product?.productId }
-        CoroutineScope(Dispatchers.IO).launch {
-            val items = CTWNetworkManager.fetchProductsInfoFromProductIds(itemsProductIds.toTypedArray())
-            withContext(Dispatchers.Main) {
-                val bundle = Bundle()
-                bundle.putSerializable("ITEMS_LIST", items)
-                val fragment = CTWGenieShoppingListFragment.newInstance()
-                fragment.arguments = bundle
-                closeLoader()
-                addFragment(fragment, R.id.fragments_container)
+        if (!CTWLoadingDialog.isLoading()) {
+            openLoader()
+            val itemsProductIds = lookItems.mapNotNull { it.product?.productId }
+            CoroutineScope(Dispatchers.IO).launch {
+                val items = CTWNetworkManager.fetchProductsInfoFromProductIds(itemsProductIds.toTypedArray())
+                withContext(Dispatchers.Main) {
+                    val bundle = Bundle()
+                    bundle.putSerializable("ITEMS_LIST", items)
+                    val fragment = CTWGenieShoppingListFragment.newInstance()
+                    fragment.arguments = bundle
+                    closeLoader()
+                    addFragment(fragment, R.id.fragments_container)
+                }
             }
         }
     }
 
     fun trendingItems() {
-        openLoader()
-        CoroutineScope(Dispatchers.IO).launch {
-            val trendingSKUS = CTWNetworkManager.fetchTrendingSKUs()
-            withContext(Dispatchers.Default) {
-                val items = CTWNetworkManager.fetchProductsInfoFromSKUS(trendingSKUS)
-                withContext(Dispatchers.Main) {
-                    if(items.isNotEmpty()) {
-                        val bundle = Bundle()
-                        bundle.putSerializable("ITEMS_LIST", items)
-                        val fragment = CTWGenieItemListingFragment.newInstance()
-                        fragment.arguments = bundle
-                        closeLoader()
-                        addFragment(fragment, R.id.fragments_container)
-                    } else {
-                        showErrorDialog("Oops... não encontrei peças em alta!")
+        if (!CTWLoadingDialog.isLoading()) {
+            openLoader()
+            CoroutineScope(Dispatchers.IO).launch {
+                val trendingSKUS = CTWNetworkManager.fetchTrendingSKUs()
+                withContext(Dispatchers.Default) {
+                    val items = CTWNetworkManager.fetchProductsInfoFromSKUS(trendingSKUS)
+                    withContext(Dispatchers.Main) {
+                        if(items.isNotEmpty()) {
+                            val bundle = Bundle()
+                            bundle.putSerializable("ITEMS_LIST", items)
+                            val fragment = CTWGenieItemListingFragment.newInstance()
+                            fragment.arguments = bundle
+                            closeLoader()
+                            addFragment(fragment, R.id.fragments_container)
+                        } else {
+                            showErrorDialog("Oops... não encontrei peças em alta!")
+                        }
                     }
                 }
             }
@@ -272,51 +284,57 @@ class CTWGenieActivity : AppCompatActivity() {
     }
 
     fun trendingLooks() {
-        openLoader()
-        CoroutineScope(Dispatchers.IO).launch {
-            val looks = CTWNetworkManager.fetchTrendingClothingAsLooks()
-            withContext(Dispatchers.Main) {
-                if (looks.isNotEmpty()) {
-                    val bundle = Bundle()
-                    bundle.putSerializable("LOOKS_LIST", looks)
-                    val fragment = CTWGenieLooksFragment.newInstance()
-                    fragment.arguments = bundle
-                    closeLoader()
-                    addFragment(fragment, R.id.fragments_container)
-                } else {
-                    showErrorDialog("Oops... não encontrei combinações!")
-                }
+        if (!CTWLoadingDialog.isLoading()) {
+            openLoader()
+            CoroutineScope(Dispatchers.IO).launch {
+                val looks = CTWNetworkManager.fetchTrendingClothingAsLooks()
+                withContext(Dispatchers.Main) {
+                    if (looks.isNotEmpty()) {
+                        val bundle = Bundle()
+                        bundle.putSerializable("LOOKS_LIST", looks)
+                        val fragment = CTWGenieLooksFragment.newInstance()
+                        fragment.arguments = bundle
+                        closeLoader()
+                        addFragment(fragment, R.id.fragments_container)
+                    } else {
+                        showErrorDialog("Oops... não encontrei combinações!")
+                    }
 
+                }
             }
         }
     }
 
     fun looksByColor(hueId: Int) {
-        openLoader()
-        CoroutineScope(Dispatchers.IO).launch {
-            val looks = CTWNetworkManager.fetchCombinationsByHue(hueId)
-            withContext(Dispatchers.Main) {
-                if (looks.isNotEmpty()) {
-                    val bundle = Bundle()
-                    bundle.putSerializable("LOOKS_LIST", looks)
-                    val fragment = CTWGenieLooksFragment.newInstance()
-                    fragment.arguments = bundle
-                    closeLoader()
-                    addFragment(fragment, R.id.fragments_container)
-                } else {
-                    showErrorDialog("Oops... não encontrei combinações!")
-                }
+        if (!CTWLoadingDialog.isLoading()) {
+            openLoader()
+            CoroutineScope(Dispatchers.IO).launch {
+                val looks = CTWNetworkManager.fetchCombinationsByHue(hueId)
+                withContext(Dispatchers.Main) {
+                    if (looks.isNotEmpty()) {
+                        val bundle = Bundle()
+                        bundle.putSerializable("LOOKS_LIST", looks)
+                        val fragment = CTWGenieLooksFragment.newInstance()
+                        fragment.arguments = bundle
+                        closeLoader()
+                        addFragment(fragment, R.id.fragments_container)
+                    } else {
+                        showErrorDialog("Oops... não encontrei combinações!")
+                    }
 
+                }
             }
         }
     }
 
     fun sendAttendanceReview(positive: Boolean) {
-        openLoader()
-        CoroutineScope(Dispatchers.IO).launch {
-            CTWNetworkManager.sendAttendanceReview(positive)
-            closeLoader()
-            finishAttendance()
+        if (!CTWLoadingDialog.isLoading()) {
+            openLoader()
+            CoroutineScope(Dispatchers.IO).launch {
+                CTWNetworkManager.sendAttendanceReview(positive)
+                closeLoader()
+                finishAttendance()
+            }
         }
     }
 

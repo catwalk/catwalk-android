@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.inputmethod.EditorInfo
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.mycatwalk.catwalk_android.CTWApplication
@@ -52,19 +53,31 @@ class CTWChatFragment : Fragment() {
 
     private fun setupListeners() {
         binding.btnSendMessage.setOnClickListener {
-            val text = binding.etMessage.text.toString()
-            if (text.isNotEmpty()) {
-                messages.add(
-                    CTWChatMessage(
-                        text,
-                        CTWChatMessageType.PlainText,
-                        CTWChatMessageSender.User
-                    )
-                )
+            sendMessageAction()
+        }
 
-                fetchMessageResponse(binding.etMessage.text.toString())
-                clearMessageInput()
+        binding.etMessage.setOnEditorActionListener { _, actionId, _ ->
+            if (actionId == EditorInfo.IME_ACTION_DONE) {
+                sendMessageAction()
+                true
             }
+            false
+        }
+    }
+
+    private fun sendMessageAction() {
+        val text = binding.etMessage.text.toString()
+        if (text.isNotEmpty()) {
+            messages.add(
+                CTWChatMessage(
+                    text,
+                    CTWChatMessageType.PlainText,
+                    CTWChatMessageSender.User
+                )
+            )
+
+            fetchMessageResponse(binding.etMessage.text.toString())
+            clearMessageInput()
         }
     }
 
