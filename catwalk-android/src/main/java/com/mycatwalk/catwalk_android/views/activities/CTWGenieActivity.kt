@@ -339,7 +339,7 @@ class CTWGenieActivity : AppCompatActivity() {
     }
 
     fun openInfoDialog(text: String?) {
-        CTWInfoDialog.displayLoadingWithText(this, true, CTWConfig.defaultErrorMessage)
+        CTWInfoDialog.displayLoadingWithText(this, true, text ?: CTWConfig.defaultErrorMessage)
     }
 
 
